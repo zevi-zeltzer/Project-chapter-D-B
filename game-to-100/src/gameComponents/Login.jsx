@@ -1,8 +1,9 @@
 import { useState } from "react";
+import "./login.css"
 
-function Login() {
+function Login(props) {
   const [num, setNum] = useState();
-  const [arrNames, setArrName] = useState([]);
+  
 
 
   const handel = (e) => {
@@ -11,9 +12,9 @@ function Login() {
 
   const handleNameChange = (index, value) => {
     if (value) {
-      const newArr = [...arrNames];
+      const newArr = [...props.arrPlayers];
       newArr[index] = value;
-      setArrName(newArr);
+      props.setArrPlayers([...newArr]);
     }
   };
   
@@ -22,6 +23,25 @@ function Login() {
       setNum(event.target.value);
     }
   };
+  const login = () => {
+    
+    if (!localStorage.getItem("winner1")) {
+     const winner = {name:"", average:0}
+      localStorage.setItem("winner1", JSON.stringify(winner));
+      localStorage.setItem("winner2", JSON.stringify(winner));
+      localStorage.setItem("winner3", JSON.stringify(winner));
+    }
+    for (let i = 0; i < props.arrPlayers.length; i++) {
+      if (!localStorage.getItem(props.arrPlayers[i])) {
+        let player = {
+          name: props.arrPlayers[i],
+          scores: [],
+        };
+        localStorage.setItem(player.name, JSON.stringify(player));
+      }
+    }
+  };
+
 
   
   return (
@@ -42,7 +62,9 @@ function Login() {
           <button
           className="login"
             onClick={() => {
-              console.log("->", arrNames); //פונקציה שבונה אובייקט למשתמש חדש ושולחת ללוקאל והופכת לדיספליי נאן
+              login();
+              console.log("->",props.arrPlayers);
+              props.setIfLogin(false); 
             }}
           >
             login
@@ -52,4 +74,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default Login
