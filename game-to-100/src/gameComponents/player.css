@@ -1,154 +1,97 @@
-/* עיצוב לכלל המסמך */
-body,.App {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-  
-    justify-content: center;
-    align-items: center;
-    /* min-height: 100vh; */
-    transition: background-color 0.3s ease;
+/* player.css */
+
+/* סגנון כללי למכולת השחקנים */
+.player-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.player {
+  width: calc(50% - 20px);
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.scores,
+.num,
+.steps {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.butAction button,
+.butWin button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.butAction button:hover,
+.butWin button:hover {
+  background-color: #dcdcdc;
+}
+
+/* הדגשה למכולת השחקן הנוכחי */
+.player.active {
+  background-color: #ffeb3b;
+  border-color: #fbc02d;
+  box-shadow: 0 0 15px rgba(251, 192, 45, 0.7);
+}
+
+/* סגנון מעומעם לשחקנים שאינם בתורם */
+.player.inactive {
+  opacity: 0.6;
+}
+
+/* תצוגה רספונסיבית למספר שונה של שחקנים */
+@media (min-width: 768px) {
+  /* עבור 4 שחקנים, גריד של 2x2 */
+  .player-container .player {
+    width: calc(50% - 20px);
   }
-  
-  /* עיצוב למכולת השחקן */
+}
+
+@media (max-width: 767px) {
+  /* עבור 3 שחקנים, 2 למעלה ו-1 למטה */
+  .player-container .player {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* עבור 2 שחקנים, תצוגה זה לצד זה */
+@media (min-width: 600px) {
+  .player-container.two-players .player {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 599px) {
+  .player-container.two-players .player {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 500px) {
   .player {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    width: 320px;
-    transition: transform 0.3s ease;
-    text-align: center;
-  }
-  
-  .player:hover {
-    transform: translateY(-5px);
-  }
-  
-  /* עיצוב לשם השחקן */
-  .name {
-    font-size: 1.8rem;
-    color: #6200ea;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  /* עיצוב לתוצאות */
-  .scores {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-  
-  /* עיצוב למספר */
-  .num {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 20px 0;
-    color: #6200ea;
-  }
-  
-  /* עיצוב לצעדים */
-  .steps {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  /* עיצוב לכפתורים */
-  button {
     width: 100%;
-    padding: 12px;
-    background-color: #6200ea;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
+    max-width: 400px;
   }
-  
-  button:hover {
-    background-color: #4500b5;
-  }
-  
-  button:focus {
-    outline: none;
-  }
-  
-  button:active {
-    background-color: #370093;
-  }
-  
-  /* עיצוב לכפתורי הפעולה */
-  .butAction {
-    margin-top: 20px;
-  }
-  
-  .butAction button {
-    width: 48px;
-    height: 48px;
-    margin: 5px;
-    font-size: 16px;
-    border-radius: 50%;
-    padding: 0;
-  }
-  
-  /* עיצוב להודעת הניצחון */
-  .win {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #6200ea;
-    margin-top: 20px;
-  }
-  
-  /* עיצוב לכפתורי הניצחון */
-  .butWin {
-    margin-top: 20px;
-  }
-  
-  .butWin button {
-    width: 100%;
-    padding: 12px;
-    background-color: #03a9f4;
-    margin-top: 10px;
-  }
-  
-  .butWin button:hover {
-    background-color: #0288d1;
-  }
-  
-  .butWin button:active {
-    background-color: #0277bd;
-  }
-  
-  /* גרסת מובייל - התאמת עיצוב למסכים קטנים */
-  @media (max-width: 768px) {
-    .player {
-      width: 90%;
-      padding: 30px;
-    }
-    
-    .name {
-      font-size: 1.5rem;
-    }
-    
-    .num {
-      font-size: 1.3rem;
-    }
-    
-    .scores, .steps {
-      font-size: 0.9rem;
-    }
-  
-    button {
-      font-size: 0.9rem;
-      padding: 10px;
-    }
-  }
-  
+}
