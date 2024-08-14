@@ -5,11 +5,11 @@ function Player(props) {
   const player = JSON.parse(localStorage.getItem(props.name));
 
   const [num, setNum] = useState(Math.floor(Math.random() * 100));
-  const [scores, setScores] = useState(player.scores);
+  const [scores, setScores] = useState(player.scores.join(", "));
   const [actionCounter, setActionCounter] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [isActive, setIsActive] = useState(true);
 
+  
   function winnerUpdating() {
     let playerAverage =
       player.scores.reduce((acc, current) => acc + current, 0) /
@@ -65,7 +65,7 @@ function Player(props) {
   }
 
   function quit() {
-    setIsActive(false);
+  
     const newArrPlayers = props.arrPlayers.filter(
       (player) => player !== props.name
     );
