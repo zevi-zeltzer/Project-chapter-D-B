@@ -32,6 +32,7 @@ function Login(props) {
       }
     }
   };
+  const hasDuplicates = arr => new Set(arr).size !== arr.length;
 
   return (
     <div className="container">
@@ -60,7 +61,7 @@ function Login(props) {
             onClick={() => {
               login();
               console.log("->", props.arrPlayers);
-              if (props.arrPlayers.length > 0) {
+              if (props.arrPlayers.length > 0&&!hasDuplicates(props.arrPlayers)) {
                 props.setIfLogin(false);
               }
             }}
